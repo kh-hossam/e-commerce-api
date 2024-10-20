@@ -19,7 +19,7 @@ class OrderService
             $order = Order::create(['user_id' => $user->id]);
 
             // get all products in the request from database once to optimize performance and avoid querying db for each product
-            $dbProducts = Product::whereIn('id', collect($products)->pluck('product_id'))->get();
+            $dbProducts = Product::whereIn('id', collect($products)->pluck('product_id')->toArray())->get();
             foreach ($products as $index => $productData) {
                 // this operation on already retrieved collection
                 $product = $dbProducts->where('id', $productData['product_id'])->first();
@@ -61,7 +61,9 @@ class OrderService
 
         try {
             $products = collect($products);
+
             // Loop through current products in the order
+            $order->load('products');
             foreach ($order->products as $existingProduct) {
                 $newProductData = $products->firstWhere('product_id', $existingProduct->id);
 
@@ -117,7 +119,7 @@ class OrderService
 
             DB::commit();
 
-            return $order->load('products');
+            return $order;
 
         } catch (ValidationException $e) {
             DB::rollBack();

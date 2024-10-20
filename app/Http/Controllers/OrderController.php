@@ -59,9 +59,9 @@ class OrderController extends Controller
     {
         Gate::authorize('update', $order);
 
-        $order->load('products');
-
         $updatedOrder = $this->orderService->updateOrder($order, $request->validated('products'));
+
+        $order->load('products');
 
         return new OrderResource($updatedOrder);
     }
