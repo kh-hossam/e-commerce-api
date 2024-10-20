@@ -123,4 +123,18 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Custom App configuration
+    |--------------------------------------------------------------------------
+    |
+    | Custom App configuration like cache time, and pagination per page, etc..
+    |
+    */
+
+    'cache_time' => env('CACHE_TIME_IN_SECONDS', 60),
+    'pagination' => env('PAGINATION_PER_PAGE', 10),
+
+
 ];
