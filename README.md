@@ -207,24 +207,25 @@ run the project (or you could use whatever local environment you are using):
     - soft delete is used to keep history
 
 #### Note: in show, update and delete Apis we use Authorization through Policies to make sure that only user which owns the order is the one making the action
-    #### Create/Update Order Body
 
-    ```json
-    {
-        "products": [
-            {
-                "product_id": 1,
-                "quantity": 1
-            },
-            {
-                "product_id": 2,
-                "quantity": 3
-            }
-        ]
-    }
-    ```
+#### Create/Update Order Body
 
-    ## Code Structure
+```json
+{
+    "products": [
+        {
+            "product_id": 1,
+            "quantity": 1
+        },
+        {
+            "product_id": 2,
+            "quantity": 3
+        }
+    ]
+}
+```
+
+## Code Structure
 
 The project follows a standard Laravel structure with the following key components:
 
