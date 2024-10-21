@@ -1,66 +1,257 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# E-commerce API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This project is an e-commerce API built with Laravel 11 and PHP 8.2. It provides endpoints for managing products, categories, orders, and user authentication.
 
-## About Laravel
+## Table of Contents
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+1. [Installation](#installation)
+   - [Normal Installation](#normal-installation)
+   - [Installation with Laravel Sail](#installation-with-laravel-sail)
+<!-- 2. [Database Setup](#database-setup)
+   - [SQLite Setup](#sqlite-setup)
+   - [MySQL Setup](#mysql-setup) -->
+2. [API Documentation](#api-documentation)
+3. [Code Structure](#code-structure)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Installation
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Normal Installation
 
-## Learning Laravel
+1. Clone the repository:
+   ```
+   git clone https://github.com/kh-hossam/e-commerce-api.git
+   ```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+2. Navigate to the project directory:
+   ```
+   cd your-repo-name
+   ```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+3. Install dependencies:
+   ```
+   composer install
+   ```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+4. Copy the `.env.example` file to `.env`:
+   ```
+   cp .env.example .env
+   ```
 
-## Laravel Sponsors
+5. Generate application key:
+   ```
+   php artisan key:generate
+   ```
+6. Database Setup
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+    #### SQLite Setup
 
-### Premium Partners
+    1. Create a new SQLite database file:
+    ```
+    touch database/database.sqlite
+    ```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+    #### MySQL Setup
 
-## Contributing
+    1. Create a new MySQL database.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    2. Update the `.env` file:
+    ```
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=your_database_name
+    DB_USERNAME=your_database_username
+    DB_PASSWORD=your_database_password
+    ```
 
-## Code of Conduct
+    After setting up the database, run migrations and seeders:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+    ```
+    php artisan migrate --seed
+    ```
 
-## Security Vulnerabilities
+### Installation with Laravel Sail
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+1. Clone the repository:
+   ```
+   git clone https://github.com/your-username/your-repo-name.git
+   ```
 
-## License
+2. Navigate to the project directory:
+   ```
+   cd your-repo-name
+   ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+3. Install composer dependencies:
+    ```
+    docker run --rm \
+        -u "$(id -u):$(id -g)" \
+        -v "$(pwd):/var/www/html" \
+        -w /var/www/html \
+        laravelsail/php82-composer:latest \
+        composer install --ignore-platform-reqs
+    ```
+
+4. Start the Docker containers:
+   ```
+   ./vendor/bin/sail up -d
+   ```
+
+5. Install dependencies:
+   ```
+   ./vendor/bin/sail composer install
+   ```
+
+6. Copy the `.env.example` file to `.env`:
+   ```
+   cp .env.example .env
+   ```
+
+7. Generate application key:
+   ```
+   ./vendor/bin/sail artisan key:generate
+   ```
+
+8. Run the database migrations and seed the database:
+
+    ```
+    ./vendor/bin/sail php artisan migrate --seed
+    ```
+
+## API Documentation
+
+A Postman collection for all API endpoints is available in the project's root directory.
+
+Api Prefix: api/v1
+
+run the project (or you could use whatever local environment you are using):
+   ```
+   php artisan serve
+   ```
+
+### Authentication
+
+- `POST /api/v1/register`: Register a new user
+- `POST /api/v1/login`: Log in a user
+- `GET /api/v1/user`: Get authenticated user details
+- `POST /api/v1/logout`: Log out the authenticated user
+
+    #### Register/Login Body example
+
+    ```json
+    {
+        "name" : "khaled",
+        "email": "khaled@gmail.com",
+        "password": "12345678",
+        "passwrod_confirmation": "12345678"
+    }
+
+    {
+        "email": "khaled@example.com",
+        "password": "password"
+    }
+    ```
+
+### Categories
+
+- `GET /api/v1/categories`: List all categories
+  - Query String: `page` (for pagination)
+- `POST /api/v1/categories`: Create a new category
+- `GET /api/v1/categories/{category}`: Get a specific category
+- `PUT /api/v1/categories/{category}`: Update a category
+- `DELETE /api/v1/categories/{category}`: Delete a category
+    - note: category can't be removed if it contains products
+
+    #### Create/Update category example
+
+    ```json
+    {
+        "name": "Laptops"
+    }
+    ```
+
+### Products
+
+- `GET /api/v1/products`: List all products
+  - Filters: `name`, `price_min`, `price_max`, `page` (for pagination)
+- `POST /api/v1/products`: Create a new product
+- `GET /api/v1/products/{product}`: Get a specific product
+- `PUT /api/v1/products/{product}`: Update a product
+- `DELETE /api/v1/products/{product}`: Delete a product
+    - soft delete is used to keep history
+    
+    #### Create/Update Product Body example
+
+    ```json
+    {
+        "name" : "Asus zephyrus g16",
+        "price" : 2500,
+        "stock" : 10,
+        "category_id" : 1
+    }
+    ```
+
+### Orders
+
+- `GET /api/v1/orders`: List all orders for the authenticated user
+  - Query String: `page` (for pagination)
+- `POST /api/v1/orders`: Create a new order
+- `GET /api/v1/orders/{order}`: Get a specific order
+- `PUT /api/v1/orders/{order}`: Update an order
+    - this update order api update both product stock and order quantity and handles 4 scenarios
+        - product quantity increased  
+        - product quantity decreased 
+        - same product quantity
+        - if product removed from request it will be removed from order and product stock is updated
+- `DELETE /api/v1/orders/{order}`: Delete an order
+    - soft delete is used to keep history
+
+#### Note: in show, update and delete Apis we use Authorization through Policies to make sure that only user which owns the order is the one making the action
+    #### Create/Update Order Body
+
+    ```json
+    {
+        "products": [
+            {
+                "product_id": 1,
+                "quantity": 1
+            },
+            {
+                "product_id": 2,
+                "quantity": 3
+            }
+        ]
+    }
+    ```
+
+    ## Code Structure
+
+The project follows a standard Laravel structure with the following key components:
+
+- `app/Http/Controllers`: Contains the API controllers
+- `app/Http/Requests`: Contains form request validation classes
+- `app/Http/Resources`: Contains API resource classes for JSON responses
+- `app/Models`: Contains Eloquent model classes
+- `app/Services`: Contains service classes for business logic
+- `app/Policies`: Contains authorization policies
+- `app/Events`: Contains defined events
+- `app/Listeners`: Contains defined listeners
+- `app/Exceptions`: Contains custom exception classes
+- `database/migrations`: Contains database migration files
+- `database/factories`: Contains database factories classes
+- `database/seeders`: Contains database seeder classes
+- `routes/api.php`: Contains API route definitions
+- `tests/Feature`: Contains Feature Tests for OrderFeatureTest, ProductFeatureTest
+- `tests/Unit`: Contains Unit Test for OrderServiceTest
+
+Key files:
+
+- `ProductController.php`: Handles CRUD operations for products
+- `OrderController.php`: Handles CRUD operations for orders
+- `ProductService.php`: Contains business logic for product operations
+- `OrderService.php`: Contains business logic for order operations
+- `OrderFeatureTest.php`: Contains feature test for order operations
+- `ProductFeatureTest.php`: Contains feature test for order operations
+- `OrderServiceTest.php`: Contains unit test for order service
+
+The project uses Laravel's built-in features such as Eloquent ORM, form request validation, API resources, and policies for authorization.
